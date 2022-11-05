@@ -18,7 +18,15 @@ resource "aws_instance" "app_server" {
   ami           = "ami-0c09c7eb16d3e8e70"   # Ubuntu Server 20.04 LTS AMI (HVM), SSD Volume Type
   instance_type = "t2.micro"                # Free tier eligible
   key_name = "Infra-oregon"                 # Change to your key name
+  user_data = <<-EOF
+              #!/bin/bash
+              cd /home/ubuntu
+              rm -rf index.html
+              touch index.html
+              echo "<h1>Feito com terraform</h1>" >> index.html
+              nohup busybox httpd -f -p 8080 &
+              EOF
   tags = {
-    Name = "Primeira Instancia"       # Name tag
+    Name = "nova maquina"             # Name tag
   }
 }

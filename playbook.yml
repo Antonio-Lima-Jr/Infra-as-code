@@ -15,4 +15,11 @@
           - django                                        # Django
           - djangorestframework                           # Django Rest
     - name: Criando projeto Django
-      shell: '. /home/ubuntu/myproject/venv/bin/activate; django-admin startproject setup /home/ubuntu/myproject' # Criação do projeto Django
+      shell: '. /home/ubuntu/myproject/venv/bin/activate; django-admin startproject setup /home/ubuntu/myproject'
+      ignore_errors: yes
+    - name: Alterando o hosts do settings.py
+      lineinfile:
+        path: /home/ubuntu/myproject/setup/settings.py    # Caminho do settings.py
+        regexp: 'ALLOWED_HOSTS = \[\]'                    # Expressão regular para encontrar a linha
+        line: 'ALLOWED_HOSTS = ["*"]'                     # Linha a ser inserida
+        backrefs: yes                                     # Se não encontrar a linha, não faz nada

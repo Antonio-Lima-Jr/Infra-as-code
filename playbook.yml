@@ -1,11 +1,11 @@
 # code: language=ansible
 - hosts: terraform-ansible
   tasks:
-    - name: criando o arquivo
-      copy:
-        dest: /home/ubuntu/index.html
-        content: "<h1>Esse bilhete é verdade"
-    - name: criando o servidor web
-      shell: "nohup busybox httpd -f -p 8080 &"
-
+    - name: Instalando python3 e virtualenv
+      apt:                                      # Instalação do python3 e virtualenv
+        pkg:                                    # Pacotes a serem instalados
+        - python3                             # Python3
+        - virtualenv
+        update_cache: yes                     # Atualiza o cache do apt
+      become: yes                               # become: yes é para executar como root
 

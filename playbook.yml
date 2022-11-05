@@ -14,4 +14,5 @@
         name:                                             # Pacotes a serem instalados
           - django                                        # Django
           - djangorestframework                           # Django Rest
-
+    - name: Criando projeto Django
+      shell: '. /home/ubuntu/myproject/venv/bin/activate; django-admin startproject setup /home/ubuntu/myproject' # Criação do projeto Django
